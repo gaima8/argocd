@@ -7,14 +7,14 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: guestbok-ui
+      app: guestbook-ui
   template:
     metadata:
       labels:
-        app: guestbk-ui
+        app: guestbook-ui
     spec:
       containers:
       - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
         name: guestbook-ui
         ports:
-        - containerPort: 80
+        - containerPort: 80000
