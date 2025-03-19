@@ -1,3 +1,3 @@
 # argocd example
 
-Purposely degraded and not
+Purposely degraded and not degraded
