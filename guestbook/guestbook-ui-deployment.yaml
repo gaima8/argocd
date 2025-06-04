@@ -15,7 +15,7 @@ spec:
         app: guestbook-ui
     spec:
       containers:
-      - image: kuokou1/ks-guestbook-demo:0.1
+      - image: oldxu3957/guestbook:v5
         name: guestbook-ui
         ports:
         - containerPort: 80
