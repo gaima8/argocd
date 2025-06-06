@@ -1,0 +1,26 @@
+---
+name: push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+      pull-requests: write
+      statuses: write
+    steps:
+      - name: Post text to a Slack channel
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            channel: mikew-argocdnotification
+            text: "howdy <@channel>!"
