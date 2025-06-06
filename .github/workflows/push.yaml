@@ -15,11 +15,30 @@ jobs:
       issues: write
       pull-requests: write
       statuses: write
+    env:
+      CHANGED_FILES:
     steps:
-      - name: show event
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Modified files
         run: |
-          echo ${GITHUB_EVENT_PATH}
-          cat ${GITHUB_EVENT_PATH}
+          case '${{ github.event_name }}' in
+            push)
+              firstCommit='${{ github.event.commits[0].id }}'
+              lastCommit='${{ github.event.commits[-1].id }}'
+              ;;
+            pull_request)
+              firstCommit='${{ github.event.base_ref }}'
+              lastCommit='${{ github.event.head_ref }}'
+              ;;
+          esac
+          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
+          git diff --name-only --diff-filter=d "${firstCommit}~1" "${lastCommit}" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Post text to a Slack channel
         uses: slackapi/slack-github-action@v2.1.0
         with:
@@ -32,8 +51,11 @@ jobs:
               - color: "28a745"
                 fields:
                   - title: "Author"
-                    short: false
+                    short: true
                     value: "${{ github.event.head_commit.author.name }}"
                   - title: "Message"
-                    short: true
+                    short: false
                     value: "<${{ github.event.head_commit.url }}|${{ github.event.head_commit.message }}>"
+                  - title: "Files"
+                    short: false
+                    value: "${{ env.CHANGED_FILES }}"
