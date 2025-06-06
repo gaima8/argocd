@@ -29,4 +29,4 @@ jobs:
                 fields:
                   - title: "Status"
                     short: true
-                    value: ${{ github.event.head_commit.message }}
+                    value: "${{ github.event.head_commit.message }}"
