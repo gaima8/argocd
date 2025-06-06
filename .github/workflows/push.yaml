@@ -21,9 +21,11 @@ jobs:
 
       - name: Modified files
         run: |
-          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
-          git diff --name-only --diff-filter=d "${{ github.event.before }}" "${{ github.event.after }}" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          {
+            echo 'CHANGED_FILES<<EOF'
+            git diff --name-only --diff-filter=d "${{ github.event.before }}" "${{ github.event.after }}"
+            echo EOF
+          } >> "$GITHUB_ENV"
 
       - name: Post text to a Slack channel
         uses: slackapi/slack-github-action@v2.1.0
