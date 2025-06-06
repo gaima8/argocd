@@ -23,4 +23,10 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             channel: mikew-argocdnotification
-            text: "howdy <@channel>!"
+            text: "Deployment finished! :rocket:"
+            attachments:
+              - color: "28a745"
+                fields:
+                  - title: "Status"
+                    short: true
+                    value: ${{ github.event.head_commit.message }}
