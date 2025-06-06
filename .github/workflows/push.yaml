@@ -22,7 +22,7 @@ jobs:
       - name: Modified files
         run: |
           echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
-          git diff --name-only --diff-filter=d "${{ github.event.before }}~1" "${{ github.event.after }}" >> $GITHUB_ENV
+          git diff --name-only --diff-filter=d "${{ github.event.before }}" "${{ github.event.after }}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Post text to a Slack channel
