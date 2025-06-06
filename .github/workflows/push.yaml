@@ -27,10 +27,13 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             channel: mikew-argocdnotification
-            text: "Deployment finished! :rocket:"
+            text: "i6-biosphere PR merged at ${{ github.event.head_commit.timestamp }}"
             attachments:
               - color: "28a745"
                 fields:
-                  - title: "Status"
+                  - title: "Author"
+                    short: false
+                    value: "${{ github.event.head_commit.author.name }}"
+                  - title: "Message"
                     short: true
-                    value: "${{ github.event.head_commit.message }}"
+                    value: "<${{ github.event.head_commit.url }}|${{ github.event.head_commit.message }}>"
