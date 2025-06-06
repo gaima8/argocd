@@ -18,10 +18,10 @@ jobs:
     env:
       CHANGED_FILES:
     steps:
-      - name: show eventAdd commentMore actions
+      - name: show event
         run: |
           echo ${GITHUB_EVENT_PATH}
-          cat ${GITHUB_EVENT_PATH}Add comment
+          cat ${GITHUB_EVENT_PATH}
           
       - name: Checkout Code
         uses: actions/checkout@v4
