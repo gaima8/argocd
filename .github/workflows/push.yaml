@@ -34,7 +34,7 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             channel: mikew-argocdnotification
-            text: "i6-biosphere PR merged at ${{ github.event.head_commit.timestamp }}"
+            text: "i6systems/biosphere-deployment PR merged at ${{ github.event.head_commit.timestamp }}"
             attachments:
               - color: "28a745"
                 fields:
